@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#073b52">
+  <title>Slanguage | Quản lý học viên</title>
+  <link rel="icon" type="image/png" href="../slanguage-logo.png">
+  <link rel="stylesheet" href="users.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=K2D:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="layout">
+    <!-- Sidebar dùng chung: logo, điều hướng giữa các trang và hồ sơ quản trị. -->
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="../dashboard/index.html" aria-label="Slanguage - Tổng quan"><img class="brand-mark" src="../slanguage-logo.png" alt="Logo Slg"><span class="brand-copy"><span class="brand-name"><span class="brand-initial">S</span><span>language</span><span class="brand-dot">.</span></span><small>ADMIN WORKSPACE</small></span></a>
+      <button class="collapse-toggle" id="collapseToggle" aria-label="Thu gọn thanh bên" title="Thu gọn thanh bên"><i class="fa-solid fa-angles-left"></i></button>
+      
+      <div class="nav-label">Điều hướng</div>
+      <nav aria-label="Điều hướng chính">
+        <a class="nav-link" href="../dashboard/index.html" data-nav="dashboard"><i class="fa-solid fa-chart-pie"></i><span>Tổng quan</span></a>
+        <a class="nav-link active" href="users.html" data-nav="students" aria-current="page"><i class="fa-solid fa-users"></i><span>Học viên</span></a>
+        <a class="nav-link" href="../dashboard/index.html#lessons" data-nav="lessons"><i class="fa-solid fa-book-open"></i><span>Bài học</span></a>
+        <a class="nav-link" href="../dashboard/index.html#questions" data-nav="questions"><i class="fa-solid fa-list-check"></i><span>Bộ câu hỏi</span></a>
+      </nav>
+      <div class="sidebar-bottom"><div class="admin-profile"><span class="admin-avatar">AD</span><span><strong>Quản trị viên</strong><small>Slanguage Admin</small></span></div></div>
+    </aside>
+    <main class="main">
+      <!-- Thanh đầu trang gồm nút mở menu mobile và breadcrumb hiện tại. -->
+      <header class="topbar">
+        <div class="top-left"><button class="menu-toggle" id="menuToggle" aria-label="Mở menu"><i class="fa-solid fa-bars"></i></button><div class="crumb"><a href="../dashboard/index.html">Trang chủ</a> <span aria-hidden="true">/</span> <strong>Học viên</strong></div></div>
+        <div class="top-actions"><span class="icon-btn" aria-label="Thông báo"><i class="fa-regular fa-bell"></i></span><span class="top-user" aria-label="Quản trị viên">AD</span></div>
+      </header>
+      <div class="content">
+        <!-- Tiêu đề trang và lối tắt mở biểu mẫu thêm học viên. -->
+        <section class="page-heading">
+          <div><p class="eyebrow">Quản lý học tập</p><h1>Danh sách học viên</h1><p>Theo dõi tiến độ, khóa học và trạng thái của học viên.</p></div>
+          <button type="button" class="button button-primary" id="addStudentBtn"><i class="fa-solid fa-user-plus"></i> Thêm học viên</button>
+        </section>
+        <!-- Thẻ thống kê tổng số học viên, đang học và đã hoàn thành. -->
+        <section class="stats" aria-label="Tổng quan học viên">
+          <article class="stat"><span class="stat-icon"><i class="fa-solid fa-users"></i></span><span><strong id="totalCount">0</strong><span>Tổng học viên</span></span></article>
+          <article class="stat"><span class="stat-icon"><i class="fa-solid fa-book-open"></i></span><span><strong id="activeCount">0</strong><span>Đang học</span></span></article>
+          <article class="stat"><span class="stat-icon"><i class="fa-solid fa-circle-check"></i></span><span><strong id="completedCount">0</strong><span>Đã hoàn thành</span></span></article>
+        </section>
+        <!-- Công cụ tìm kiếm/lọc, bảng dữ liệu và trạng thái không có kết quả. -->
+        <section class="panel" aria-label="Bảng quản lý học viên">
+          <div class="toolbar">
+            <div class="toolbar-left">
+              <label class="search-box"><i class="fa-solid fa-magnifying-glass"></i><input id="searchInput" type="search" placeholder="Tìm theo tên hoặc email..." aria-label="Tìm học viên"></label>
+              <select class="filter-select" id="statusFilter" aria-label="Lọc theo trạng thái">
+                <option value="all">Tất cả trạng thái</option>
+                <option value="active">Đang học</option>
+                <option value="completed">Hoàn thành</option>
+                <option value="inactive">Tạm nghỉ</option>
+              </select>
+            </div>
+            <div class="toolbar-right"><span class="result-count" id="resultCount" aria-live="polite"></span></div>
+          </div>
+          <div class="table-scroll">
+            <table>
+              <thead><tr><th>Học viên</th><th>Khóa học</th><th>Trình độ</th><th>Tiến độ</th><th>Trạng thái</th><th>Ngày tham gia</th><th>Thao tác</th></tr></thead>
+              <tbody id="studentTableBody"></tbody>
+            </table>
+            <div class="empty-state" id="noStudents" hidden><i class="fa-solid fa-user-group"></i><h2>Chưa tìm thấy học viên</h2><p>Thử thay đổi từ khóa hoặc bộ lọc trạng thái.</p></div>
+          </div>
+        </section>
+        <p class="footer-note">Slanguage · Khu vực quản trị</p>
+      </div>
+    </main>
+  </div>
+  <!-- Biểu mẫu dùng chung để thêm mới hoặc cập nhật thông tin học viên. -->
+  <div class="modal-backdrop" id="studentModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal">
+      <div class="modal-head"><h2 id="modalTitle">Thêm học viên</h2><button type="button" class="close-btn" id="closeModalBtn" aria-label="Đóng">&times;</button></div>
+      <form id="studentForm">
+        <div class="modal-body">
+          <input type="hidden" id="studentId">
+          <div class="field"><label for="fullName">Họ và tên</label><input id="fullName" name="fullName" type="text" placeholder="Nguyễn Văn A" required maxlength="80"></div>
+          <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" placeholder="hocvien@example.com" required maxlength="120"></div>
+          <div class="field-grid">
+            <div class="field"><label for="course">Khóa học</label><select id="course" name="course" required><option value="">Chọn khóa học</option><option>Tiếng Anh</option><option>Tiếng Nhật</option><option>Tiếng Hàn</option><option>Tiếng Trung</option><option>Tiếng Pháp</option></select></div>
+            <div class="field"><label for="level">Trình độ</label><select id="level" name="level"><option>A1</option><option>A2</option><option>B1</option><option>B2</option><option>C1</option></select></div>
+          </div>
+          <div class="field-grid">
+            <div class="field"><label for="progress">Tiến độ (%)</label><input id="progress" name="progress" type="number" min="0" max="100" value="0" required></div>
+            <div class="field"><label for="status">Trạng thái</label><select id="status" name="status" required><option value="active">Đang học</option><option value="completed">Hoàn thành</option><option value="inactive">Tạm nghỉ</option></select></div>
+          </div>
+        </div>
+        <div class="modal-actions"><button type="button" class="button button-muted" id="cancelModalBtn">Hủy</button><button type="submit" class="button button-primary"><i class="fa-solid fa-check"></i> Lưu học viên</button></div>
+      </form>
+    </div>
+  </div>
+  <!-- Thông báo sau khi thêm, sửa hoặc xóa học viên. -->
+  <div class="toast" id="toast" role="status"><i class="fa-solid fa-circle-check"></i><span id="toastMessage"></span></div>
+  <script src="users.js"></script>
+</body>
+</html>
