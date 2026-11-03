@@ -1885,15 +1885,15 @@ body :not(i):not(svg) {
 .brand {
   width: 100%;
   min-width: 0;
-  gap: 10px;
+  gap: 8px;
   padding: 0 4px 36px !important;
   overflow: visible;
 }
 
 .brand-mark {
-  width: 62px;
-  height: 58px;
-  flex: 0 0 62px;
+  width: 70px;
+  height: 64px;
+  flex: 0 0 70px;
   object-fit: contain;
   border-radius: 0;
   background: transparent;
@@ -1902,7 +1902,7 @@ body :not(i):not(svg) {
 
 .brand-copy {
   min-width: 0;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .brand-name {
@@ -1916,12 +1916,33 @@ body :not(i):not(svg) {
   text-shadow: 0 1px 0 rgba(7, 59, 82, 0.12);
 }
 
-.brand-name > span:first-child {
-  color: #c18c00;
+/* Wordmark tách chữ S trắng khỏi phần "language" chuyển sắc và dấu chấm crimson. */
+.brand-name.overlay-brand-name {
+  display: inline-flex;
+  align-items: baseline;
+  white-space: nowrap;
+  font-family: "K2D", sans-serif;
+  font-size: 1.65rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: normal;
+  color: #fff;
+  text-shadow: none;
 }
 
-.brand-name > .brand-initial {
-  color: #fff;
+.overlay-brand-name .brand-language {
+  display: inline-block;
+  background: linear-gradient(135deg, #ffb703 0%, #ff8800 45%, #dc143c 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  font-weight: 800;
+}
+
+.overlay-brand-name .brand-dot {
+  color: var(--color-crimson, var(--crimson));
+  -webkit-text-fill-color: currentColor;
 }
 
 .brand-dot {
@@ -2044,9 +2065,9 @@ body :not(i):not(svg) {
   }
 
   .sidebar-collapsed .brand-mark {
-    width: 62px;
-    height: 58px;
-    flex-basis: 62px;
+    width: 70px;
+    height: 64px;
+    flex-basis: 70px;
   }
 
   .sidebar-collapsed .brand-copy,

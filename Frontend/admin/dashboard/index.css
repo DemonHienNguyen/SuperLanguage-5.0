@@ -534,19 +534,22 @@ body{background:#f7f5fc;color:var(--ocean-deep)}
 .sidebar-collapsed .main{margin-left:82px!important}
 
 /* Kích thước logo Slg, wordmark Slanguage và khoảng trống dành cho nút sidebar. */
-.brand{width:100%;min-width:0;gap:10px;padding:0 4px 36px!important;overflow:visible}
+.brand{width:100%;min-width:0;gap:8px;padding:0 4px 36px!important;overflow:visible}
 
-.brand-mark{width:62px;height:58px;flex:0 0 62px;object-fit:contain;border-radius:0;background:transparent;box-shadow:none}
+.brand-mark{width:70px;height:64px;flex:0 0 70px;object-fit:contain;border-radius:0;background:transparent;box-shadow:none}
 
-.brand-copy{min-width:0;overflow:hidden}
+.brand-copy{min-width:0;overflow:visible}
 
 .brand-name{display:block;white-space:nowrap;font:800 19px/1 "K2D",sans-serif;letter-spacing:-.7px;color:#c18c00;text-shadow:0 1px 0 rgba(7,59,82,.12)}
 
 .brand-name>span:first-child{color:#c18c00}
 
-.brand-name>.brand-initial{color:#fff}
-
 .brand-dot{color:var(--crimson)}
+
+/* Wordmark dùng gradient cho "language" và màu crimson cho dấu chấm. */
+.brand-name.overlay-brand-name{display:inline-flex;align-items:baseline;white-space:nowrap;font-family:"K2D",sans-serif;font-size:1.65rem;font-weight:800;line-height:1;letter-spacing:normal;color:#fff;text-shadow:none}
+.overlay-brand-name .brand-language{display:inline-block;background:linear-gradient(135deg,#ffb703 0%,#ff8800 45%,#dc143c 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;font-weight:800}
+.overlay-brand-name .brand-dot{color:var(--color-crimson,var(--crimson));-webkit-text-fill-color:currentColor}
 
 .brand-copy small{color:#8193a6}
 
@@ -599,7 +602,7 @@ body{background:#f7f5fc;color:var(--ocean-deep)}
 
   .sidebar-collapsed .brand{justify-content:flex-start;padding:0 4px 36px!important}
 
-  .sidebar-collapsed .brand-mark{width:62px;height:58px;flex-basis:62px}
+  .sidebar-collapsed .brand-mark{width:70px;height:64px;flex-basis:70px}
 
   .sidebar-collapsed .brand-copy,.sidebar-collapsed .nav-label,.sidebar-collapsed .nav-link span,.sidebar-collapsed .admin-profile>span:last-child{display:initial!important}
 
