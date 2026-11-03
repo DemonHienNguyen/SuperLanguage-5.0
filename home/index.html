@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slanguage - Bảng Điều Khiển Học Viên</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=K2D:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+  <!-- ================= TOP NAVBAR ================= -->
+  <header class="navbar">
+    <div class="navbar-container">
+      <div class="nav-left">
+        <a href="./index.html" class="brand-logo">
+          <img src="../assets/logo.png" alt="Slanguage Logo" class="brand-logo-img">
+          <span class="brand-name">S<span class="brand-language">language</span><span class="brand-dot">.</span></span>
+        </a>
+
+        <nav>
+          <ul class="nav-links">
+            <li><a href="./index.html" class="active">Trang chủ</a></li>
+            <li><a href="../roadmap/index.html">Học tập</a></li>
+            <li><a href="../vocabulary/index.html">Luyện từ vựng</a></li>
+            <li><a href="../profile/index.html">Tiến độ học</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="nav-right">
+        <div class="stat-chip streak" title="Chuỗi ngày học liên tục">
+          <i class="fa-solid fa-fire"></i>
+          <span>14 Ngày</span>
+        </div>
+        <div class="stat-chip xp" title="Điểm kinh nghiệm tích lũy">
+          <i class="fa-solid fa-star"></i>
+          <span id="headerXPVal">2,450 XP</span>
+        </div>
+        <div class="stat-chip hearts" title="Năng lượng làm bài">
+          <i class="fa-solid fa-heart"></i>
+          <span>5/5</span>
+        </div>
+
+        <!-- 3-Language Dropdown Selector (Between Hearts and Account) -->
+        <div class="lang-dropdown" id="langDropdown">
+          <button type="button" class="lang-dropdown-btn" id="langDropdownBtn" aria-haspopup="true" aria-expanded="false" title="Chọn ngôn ngữ học">
+            <img src="../assets/flags/flag-jp.png" alt="Tiếng Nhật" class="flag-icon" id="currentLangFlag">
+            <span class="lang-current-label" id="currentLangLabel">Tiếng Nhật</span>
+            <i class="fa-solid fa-chevron-down lang-chevron"></i>
+          </button>
+          <div class="lang-dropdown-menu" id="langDropdownMenu" role="menu">
+            <button type="button" class="lang-dropdown-item active" data-lang="ja" role="menuitem">
+              <img src="../assets/flags/flag-jp.png" alt="JP" class="flag-icon">
+              <span class="lang-name">Tiếng Nhật (日本語)</span>
+              <i class="fa-solid fa-check check-icon"></i>
+            </button>
+            <button type="button" class="lang-dropdown-item" data-lang="en" role="menuitem">
+              <img src="../assets/flags/flag-en.png" alt="EN" class="flag-icon">
+              <span class="lang-name">English (Tiếng Anh)</span>
+              <i class="fa-solid fa-check check-icon"></i>
+            </button>
+            <button type="button" class="lang-dropdown-item" data-lang="vi" role="menuitem">
+              <img src="../assets/flags/flag-vn.png" alt="VN" class="flag-icon">
+              <span class="lang-name">Tiếng Việt (Vietnamese)</span>
+              <i class="fa-solid fa-check check-icon"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- User Account Dropdown -->
+        <div class="user-dropdown" id="userDropdown">
+          <button type="button" class="user-dropdown-btn" id="userDropdownBtn" aria-haspopup="true" aria-expanded="false" title="Menu tài khoản học viên">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80" alt="Avatar" class="user-avatar-mini">
+            <div class="user-info-text">
+              <div class="name">Nhật Anh</div>
+              <div class="role">Học viên VIP</div>
+            </div>
+            <i class="fa-solid fa-chevron-down user-chevron"></i>
+          </button>
+          <div class="user-dropdown-menu" id="userDropdownMenu" role="menu">
+            <a href="../profile/index.html" class="user-dropdown-item" role="menuitem">
+              <div class="menu-item-icon"><i class="fa-solid fa-id-badge"></i></div>
+              <div class="menu-item-text">
+                <span class="title">Thông tin cá nhân</span>
+                <span class="sub">Hồ sơ & cài đặt tài khoản</span>
+              </div>
+            </a>
+            <a href="../profile/index.html#tabProgress" class="user-dropdown-item" role="menuitem">
+              <div class="menu-item-icon"><i class="fa-solid fa-chart-pie"></i></div>
+              <div class="menu-item-text">
+                <span class="title">Tiến độ học tập</span>
+                <span class="sub">Thống kê XP & chuỗi ngày</span>
+              </div>
+            </a>
+            <div class="user-dropdown-divider"></div>
+            <a href="../login/index.html" class="user-dropdown-item logout-item" role="menuitem">
+              <div class="menu-item-icon"><i class="fa-solid fa-arrow-right-from-bracket"></i></div>
+              <div class="menu-item-text">
+                <span class="title">Đăng xuất</span>
+                <span class="sub">Thoát khỏi phiên học</span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= MAIN WRAPPER ================= -->
+  <main class="main-wrapper">
+    <!-- LEFT MAIN COLUMN -->
+    <div class="content-left">
+      
+      <!-- HERO WELCOME BANNER -->
+      <section class="hero-card">
+        <div class="hero-header">
+          <div>
+            <div class="hero-greeting">
+              <i class="fa-solid fa-sun"></i> Chào buổi sáng, Nhật Anh! 🌟
+            </div>
+            <h1 class="hero-title">Sẵn sàng bứt phá ngôn ngữ hôm nay!</h1>
+            <p class="hero-subtitle" id="heroCourseTitle">Lộ trình: Tiếng Nhật Sơ Cấp JLPT N5</p>
+          </div>
+
+          <div class="active-course-badge">
+            <div class="label">Đang học</div>
+            <div class="lang-name" id="heroActiveLang">
+              <img src="../assets/flags/flag-jp.png" alt="Tiếng Nhật" class="flag-icon-badge">
+              <span>Tiếng Nhật</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Course Progress -->
+        <div class="hero-progress-section">
+          <div class="progress-header">
+            <span class="lesson-name" id="heroLessonName">Bài 14: Gọi món trong quán ăn Tokyo & Mẫu câu V-tai desu</span>
+            <span class="percentage" id="heroProgressPercent">72%</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" id="heroProgressFill" style="width: 72%;"></div>
+          </div>
+        </div>
+
+        <div class="hero-actions">
+          <button class="btn-primary" id="btnResumeLesson">
+            <i class="fa-solid fa-circle-play"></i> Tiếp tục bài học
+          </button>
+          <button class="btn-secondary" id="btnListenAudio">
+            <i class="fa-solid fa-headphones"></i> Luyện nghe phát âm
+          </button>
+          <a href="../profile/index.html" class="btn-secondary">
+            <i class="fa-solid fa-id-badge"></i> Xem hồ sơ cá nhân
+          </a>
+        </div>
+      </section>
+
+      <!-- 3 LANGUAGES SWITCHER CARDS -->
+      <section>
+        <div class="section-title-wrap">
+          <h2 class="section-title">
+            <i class="fa-solid fa-earth-asia"></i> 3 Ngôn ngữ trong chương trình học
+          </h2>
+          <span style="font-size: 0.88rem; color: var(--text-muted);">Bấm vào thẻ để chuyển đổi lộ trình học tức thì</span>
+        </div>
+
+        <div class="language-cards-grid">
+          <!-- Japanese Card -->
+          <div class="lang-card active-selected" data-lang="ja">
+            <div class="lang-card-header">
+              <div class="lang-flag-circle">
+                <img src="../assets/flags/flag-jp.png" alt="Tiếng Nhật" class="flag-circle-img">
+              </div>
+              <div class="lang-card-info">
+                <h4>Tiếng Nhật (日本語)</h4>
+                <span>JLPT N5 - N1 • Đàm thoại</span>
+              </div>
+            </div>
+            <p style="font-size: 0.85rem; color: #567280; line-height: 1.4;">
+              Hệ chữ Hiragana, Katakana, Kanji và cấu trúc ngữ cảnh chuẩn Tokyo.
+            </p>
+            <div class="lang-card-stats">
+              <div class="stat-item">
+                <span class="stat-label">Tiến độ</span>
+                <span class="stat-val">72%</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-label">Từ vựng</span>
+                <span class="stat-val">380 từ</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-label">Trình độ</span>
+                <span class="stat-val">N5 Sơ Cấp</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- English Card -->
+          <div class="lang-card" data-lang="en">
+            <div class="lang-card-header">
+              <div class="lang-flag-circle">
+                <img src="../assets/flags/flag-en.png" alt="English" class="flag-circle-img">
+              </div>
+              <div class="lang-card-info">
+                <h4>Tiếng Anh (English)</h4>
+                <span>IELTS • Giao tiếp quốc tế</span>
+              </div>
+            </div>
+            <p style="font-size: 0.85rem; color: #567280; line-height: 1.4;">
+              Phản xạ ngữ âm chuẩn Oxford, thành ngữ & văn phong môi trường toàn cầu.
+            </p>
+            <div class="lang-card-stats">
+              <div class="stat-item">
+                <span class="stat-label">Tiến độ</span>
+                <span class="stat-val">85%</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-label">Từ vựng</span>
+                <span class="stat-val">1,450 từ</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-label">Trình độ</span>
+                <span class="stat-val">B2 Trung Cấp</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Vietnamese Card -->
+          <div class="lang-card" data-lang="vi">
+            <div class="lang-card-header">
+              <div class="lang-flag-circle">
+                <img src="../assets/flags/flag-vn.png" alt="Tiếng Việt" class="flag-circle-img">
+              </div>
+              <div class="lang-card-info">
+                <h4>Tiếng Việt (Vietnamese)</h4>
+                <span>Thành ngữ • Văn hóa ứng xử</span>
+              </div>
+            </div>
+            <p style="font-size: 0.85rem; color: #567280; line-height: 1.4;">
+              Làm chủ hệ thống 6 thanh điệu, ca dao tục ngữ và đàm thoại tinh tế.
+            </p>
+            <div class="lang-card-stats">
+              <div class="stat-item">
+                <span class="stat-label">Tiến độ</span>
+                <span class="stat-val">94%</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-label">Từ vựng</span>
+                <span class="stat-val">2,100 từ</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-label">Trình độ</span>
+                <span class="stat-val">Bản Xứ</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ================= ROADMAP TREE SHOWCASE & TEASER ================= -->
+      <section class="roadmap-teaser-card" id="roadmapTeaserSection">
+        <div class="teaser-content">
+          <div class="teaser-badge">
+            <i class="fa-solid fa-tree"></i> Kiến trúc Cây Lộ Trình Độc Quyền
+          </div>
+          <h2 class="teaser-title">Lộ trình học tập phân nhánh dạng Cây Tri Thức</h2>
+          <p class="teaser-desc">
+            Không còn danh sách bài học phẳng nhàm chán! Slanguage xây dựng lộ trình theo mô hình Cây Kỹ Năng (Skill Tree) đa tầng. 
+            Mỗi nhánh cây mở ra các chân trời từ vựng, ngữ pháp và đàm thoại thực chiến. Học viên chủ động rẽ nhánh, thu thập XP và chạm tay vào các cột mốc chứng chỉ quốc tế.
+          </p>
+
+          <!-- Tree Visual Pillars Preview -->
+          <div class="tree-preview-pillars">
+            <div class="tree-pillar-item">
+              <div class="pillar-icon"><i class="fa-solid fa-seedling"></i></div>
+              <div class="pillar-text">
+                <strong>Gốc rễ vững chắc</strong>
+                <span>Ngữ âm chuẩn Oxford & Kana nền tảng</span>
+              </div>
+            </div>
+            <div class="tree-pillar-item">
+              <div class="pillar-icon"><i class="fa-solid fa-code-branch"></i></div>
+              <div class="pillar-text">
+                <strong>Nhánh kỹ năng linh hoạt</strong>
+                <span>Tùy chọn học Giao tiếp hoặc Ngữ pháp chuyên sâu</span>
+              </div>
+            </div>
+            <div class="tree-pillar-item">
+              <div class="pillar-icon"><i class="fa-solid fa-crown"></i></div>
+              <div class="pillar-text">
+                <strong>Cột mốc vinh danh</strong>
+                <span>Chinh phục JLPT N5-N1 & IELTS 7.5+</span>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </section>
+
+      <!-- ================= CORE METHODOLOGY & HIGHLIGHTS ================= -->
+      <section class="methodology-section" id="methodologySection">
+        <div class="section-title-wrap">
+          <h2 class="section-title">
+            <i class="fa-solid fa-graduation-cap"></i> Phương pháp đào tạo vượt trội tại Slanguage
+          </h2>
+          <span style="font-size: 0.88rem; color: var(--text-muted);">Ứng dụng khoa học não bộ và tương tác thời gian thực</span>
+        </div>
+
+        <div class="methodology-grid">
+          <div class="method-card">
+            <div class="method-icon-box" style="background: rgba(0, 180, 216, 0.15); color: var(--color-ocean-light);">
+              <i class="fa-solid fa-diagram-project"></i>
+            </div>
+            <h3>Cây Kỹ Năng Trực Quan</h3>
+            <p>Học phân nhánh theo năng khiếu và mục tiêu nghề nghiệp, theo dõi tiến độ nở hoa từng nút bài học.</p>
+          </div>
+
+          <div class="method-card">
+            <div class="method-icon-box" style="background: rgba(255, 183, 3, 0.15); color: var(--color-topaz);">
+              <i class="fa-solid fa-brain"></i>
+            </div>
+            <h3>Lặp lại ngắt quãng (SRS)</h3>
+            <p>Thuật toán nhắc lại từ vựng vào đúng thời điểm chuẩn bị quên, giúp ghi nhớ vĩnh viễn vào phản xạ vô thức.</p>
+          </div>
+
+          <div class="method-card">
+            <div class="method-icon-box" style="background: rgba(220, 20, 60, 0.15); color: var(--color-crimson);">
+              <i class="fa-solid fa-trophy"></i>
+            </div>
+            <h3>Gamification Hứng Khởi</h3>
+            <p>Tích lũy XP, duy trì chuỗi Streak rực lửa mỗi ngày và đua top Bảng Vàng vinh danh cùng cộng đồng học viên.</p>
+          </div>
+
+          <div class="method-card">
+            <div class="method-icon-box" style="background: rgba(122, 226, 207, 0.15); color: #7AE2CF;">
+              <i class="fa-solid fa-microphone-lines"></i>
+            </div>
+            <h3>Phản xạ âm điệu tự nhiên</h3>
+            <p>Hệ thống mẫu câu thực tế đời thường giúp học viên nói tự nhiên như người bản xứ ngay từ tuần học đầu tiên.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= PLATFORM IMPACT STATS ================= -->
+      <section class="impact-stats-card">
+        <div class="stats-grid">
+          <div class="stat-cell">
+            <div class="stat-number">50,000+</div>
+            <div class="stat-label">Học viên đang tích cực học tập</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-number">98.4%</div>
+            <div class="stat-label">Tỷ lệ đạt chứng chỉ mục tiêu</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-number">3,500+</div>
+            <div class="stat-label">Bài học cây kỹ năng đa tầng</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-number">4.9 / 5.0</div>
+            <div class="stat-label">Đánh giá hài lòng toàn diện</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= STUDENT REVIEWS ================= -->
+      <section class="reviews-section">
+        <div class="section-title-wrap">
+          <h2 class="section-title">
+            <i class="fa-solid fa-comments"></i> Học viên nói gì về Slanguage?
+          </h2>
+          <span style="font-size: 0.88rem; color: var(--text-muted);">Chia sẻ từ những người đã chinh phục mục tiêu</span>
+        </div>
+
+        <div class="reviews-grid">
+          <div class="review-card">
+            <div class="review-stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="review-quote">
+              "Lộ trình cây kỹ năng thực sự làm mình bất ngờ! Mình không bị ép học thuộc lòng máy móc mà được tự chọn rẽ nhánh đàm thoại du lịch Nhật Bản trước. Rất trực quan!"
+            </p>
+            <div class="review-author">
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" alt="Avatar" class="review-avatar">
+              <div>
+                <strong>Nguyễn Thu Hà</strong>
+                <span>JLPT N3 Tokyo • Đã học 6 tháng</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="review-card">
+            <div class="review-stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="review-quote">
+              "Phương pháp Spaced Repetition kết hợp cây bài học giúp mình tích lũy hơn 1,500 từ vựng tiếng Anh chuyên ngành mà không thấy mệt mỏi chút nào."
+            </p>
+            <div class="review-author">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80" alt="Avatar" class="review-avatar">
+              <div>
+                <strong>Trần Quốc Bảo</strong>
+                <span>IELTS 7.5 • Chuyên viên tài chính</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- RIGHT SIDEBAR -->
+    <aside class="sidebar-right">
+      
+      <!-- STREAK BOX -->
+      <div class="streak-box">
+        <div class="streak-header">
+          <div>
+            <div style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; color: #a4bcc8;">Chuỗi học tập</div>
+            <div class="streak-count"><i class="fa-solid fa-fire"></i> 14 Ngày</div>
+          </div>
+          <div style="text-align: right; font-size: 0.82rem; color: #7AE2CF;">
+            Mục tiêu: 21 ngày
+          </div>
+        </div>
+        <p style="font-size: 0.85rem; color: #b7ccd6; line-height: 1.4;">
+          Bạn đang giữ phong độ cực tốt! Học ít nhất 1 bài hôm nay để không mất chuỗi nhé.
+        </p>
+
+        <!-- 7 Days tracker -->
+        <div class="streak-days">
+          <div class="day-circle">
+            <span class="day-name">T2</span>
+            <div class="day-bubble checked"><i class="fa-solid fa-check"></i></div>
+          </div>
+          <div class="day-circle">
+            <span class="day-name">T3</span>
+            <div class="day-bubble checked"><i class="fa-solid fa-check"></i></div>
+          </div>
+          <div class="day-circle">
+            <span class="day-name">T4</span>
+            <div class="day-bubble checked"><i class="fa-solid fa-check"></i></div>
+          </div>
+          <div class="day-circle">
+            <span class="day-name">T5</span>
+            <div class="day-bubble checked"><i class="fa-solid fa-check"></i></div>
+          </div>
+          <div class="day-circle">
+            <span class="day-name">T6</span>
+            <div class="day-bubble checked"><i class="fa-solid fa-check"></i></div>
+          </div>
+          <div class="day-circle">
+            <span class="day-name">T7</span>
+            <div class="day-bubble active-today"><i class="fa-solid fa-fire"></i></div>
+          </div>
+          <div class="day-circle">
+            <span class="day-name">CN</span>
+            <div class="day-bubble">CN</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DAILY QUESTS -->
+      <div class="sidebar-card">
+        <div class="sidebar-card-title">
+          <span><i class="fa-solid fa-bullseye"></i> Nhiệm vụ hôm nay</span>
+          <span style="font-size: 0.78rem; color: var(--color-teal);">Làm mới sau 8h</span>
+        </div>
+
+        <div class="quest-list">
+          <div class="quest-item done">
+            <div class="quest-check"><i class="fa-solid fa-check"></i></div>
+            <div class="quest-details">
+              <div class="quest-title">Luyện 1 bài phát âm chuẩn</div>
+              <div class="quest-reward">+20 XP • Hoàn thành</div>
+            </div>
+          </div>
+
+          <div class="quest-item pending">
+            <div class="quest-check"></div>
+            <div class="quest-details">
+              <div class="quest-title">Ghi nhớ 10 từ vựng mới</div>
+              <div class="quest-reward">+25 XP • Tiến độ (7/10)</div>
+            </div>
+          </div>
+
+          <div class="quest-item pending">
+            <div class="quest-check"></div>
+            <div class="quest-details">
+              <div class="quest-title">Đạt 95% trong bài kiểm tra nhanh</div>
+              <div class="quest-reward">+30 XP • Chưa bắt đầu</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LEADERBOARD RANKING -->
+      <div class="sidebar-card">
+        <div class="sidebar-card-title">
+          <span><i class="fa-solid fa-trophy"></i> Bảng Vàng Kim Cương</span>
+          <span style="font-size: 0.78rem; color: var(--text-muted);">Tuần 44</span>
+        </div>
+
+        <div class="ranking-list">
+          <div class="rank-item">
+            <span class="rank-num gold">1</span>
+            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&auto=format&fit=crop&q=80" alt="User 1" class="rank-avatar">
+            <span class="rank-name">Minh Hoàng</span>
+            <span class="rank-xp">3,120 XP</span>
+          </div>
+
+          <div class="rank-item">
+            <span class="rank-num silver">2</span>
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&auto=format&fit=crop&q=80" alt="User 2" class="rank-avatar">
+            <span class="rank-name">Lan Phương</span>
+            <span class="rank-xp">2,890 XP</span>
+          </div>
+
+          <div class="rank-item is-user">
+            <span class="rank-num bronze">3</span>
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" alt="You" class="rank-avatar">
+            <span class="rank-name">Bạn (Nhật Anh)</span>
+            <span class="rank-xp">2,450 XP</span>
+          </div>
+
+          <div class="rank-item">
+            <span class="rank-num">4</span>
+            <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=100&auto=format&fit=crop&q=80" alt="User 4" class="rank-avatar">
+            <span class="rank-name">Kenji Sato</span>
+            <span class="rank-xp">2,110 XP</span>
+          </div>
+        </div>
+      </div>
+
+
+
+    </aside>
+  </main>
+
+  <!-- ================= LESSON QUIZ MODAL ================= -->
+  <div class="modal-overlay" id="lessonModalOverlay">
+    <div class="lesson-modal">
+      <button class="modal-close-btn" id="modalCloseBtn"><i class="fa-solid fa-xmark"></i></button>
+      
+      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+        <span style="background: var(--color-mint-light); color: var(--color-teal); font-size: 0.8rem; font-weight: 700; padding: 4px 12px; border-radius: 20px;">
+          Tương tác trực tiếp
+        </span>
+        <span style="font-size: 0.85rem; color: #ffaa5a; font-weight: 700;">+20 XP thưởng</span>
+      </div>
+
+      <h3 id="quizModalTitle" style="font-family: 'K2D', sans-serif; font-size: 1.5rem; color: var(--color-dark); margin-bottom: 12px;">
+        Bài Luyện Nhanh
+      </h3>
+
+      <p id="quizQuestionText" style="font-size: 1.05rem; font-weight: 600; color: #375362; line-height: 1.5; margin-bottom: 20px;">
+        Đang tải câu hỏi...
+      </p>
+
+      <div class="modal-quiz-options" id="quizOptionsContainer">
+        <!-- Buttons injected dynamically by TypeScript -->
+      </div>
+
+      <div id="quizFeedback"></div>
+    </div>
+  </div>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-col">
+        <div class="brand-logo" style="margin-bottom: 14px;">
+          <img src="../assets/logo.png" alt="Slanguage Logo" class="brand-logo-img">
+          <span class="brand-name">S<span class="brand-language">language</span><span class="brand-dot">.</span></span>
+        </div>
+        <p style="color: #a4bcc8; font-size: 0.9rem; line-height: 1.6; max-width: 380px;">
+          Nền tảng học 3 ngôn ngữ Anh - Nhật - Việt hàng đầu cho học viên, kết hợp phương pháp phản xạ tự nhiên và lặp lại ngắt quãng thông minh.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Chương trình học</h4>
+        <ul>
+          <li><a href="javascript:void(0)" onclick="document.querySelector('[data-lang=en]').click()">Tiếng Anh Giao Tiếp (B1-C1)</a></li>
+          <li><a href="javascript:void(0)" onclick="document.querySelector('[data-lang=ja]').click()">Tiếng Nhật JLPT (N5-N1)</a></li>
+          <li><a href="javascript:void(0)" onclick="document.querySelector('[data-lang=vi]').click()">Tiếng Việt Cho Người Đi Làm</a></li>
+          <li><a href="javascript:void(0)">Luyện ngữ âm với AI</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Trang điều hướng</h4>
+        <ul>
+          <li><a href="./index.html">Trang chủ Học viên</a></li>
+          <li><a href="../roadmap/index.html">Cây Lộ trình học tập</a></li>
+          <li><a href="../login/index.html">Đăng nhập tài khoản</a></li>
+          <li><a href="../register/index.html">Đăng ký thành viên mới</a></li>
+          <li><a href="../profile/index.html">Hồ sơ & Tiến độ học</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Bảng màu thiết kế</h4>
+        <div style="display: flex; gap: 8px; margin-top: 8px;">
+          <span style="background: #DC143C; width: 32px; height: 32px; border-radius: 8px; display: inline-block; border: 1px solid rgba(255,255,255,0.2);" title="Red Crimson (#DC143C)"></span>
+          <span style="background: #0077B6; width: 32px; height: 32px; border-radius: 8px; display: inline-block; border: 1px solid rgba(255,255,255,0.2);" title="Ocean Blue (#0077B6)"></span>
+          <span style="background: #FFB703; width: 32px; height: 32px; border-radius: 8px; display: inline-block; border: 1px solid rgba(255,255,255,0.2);" title="Yellow Topaz (#FFB703)"></span>
+          <span style="background: #F8F6FD; width: 32px; height: 32px; border-radius: 8px; display: inline-block; border: 1px solid rgba(255,255,255,0.2);" title="White Amethyst (#F8F6FD)"></span>
+        </div>
+        <p style="font-size: 0.8rem; color: #82a0af; margin-top: 10px;">
+          Sự kết hợp: Red Crimson • Ocean Blue • Yellow Topaz • White Amethyst.
+        </p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>&copy; 2026 Slanguage Education Platform. Mọi quyền được bảo lưu.</div>
+      <div>Dành riêng cho Học viên • Đạt chuẩn tương thích Web & Di động</div>
+    </div>
+  </footer>
+
+  <!-- GLOBAL TRANSITION LOADING SCREEN -->
+  <div id="slanguageLoadingOverlay" class="loading-screen-overlay">
+    <div class="loading-content-box">
+      <div class="video-frame">
+        <video id="loadingVideoPlayer" src="../assets/loading.mp4" autoplay loop playsinline></video>
+      </div>
+      <div class="loading-text-wrap">
+        <span class="loading-title">Đang tải, hãy đợi...</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TypeScript compiled script execution -->
+  <script src="./home.js"></script>
+</body>
+</html>
