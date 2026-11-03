@@ -33,25 +33,25 @@
 
 ```text
 superlanguage-5.0/
-├── frontend/                     # Web Client (HTML/CSS/JS -> Firebase Hosting)
+├── frontend/                     # Web Client (TypeScript + Vite/Bundler)
 │   ├── public/                   # Tài nguyên tĩnh
 │   │   ├── favicon.ico
 │   │   └── images/               # Logo, banners, hình minh họa
-│   ├── css/                      # Stylesheets
-│   │   ├── style.css             # Style chung toàn trang
-│   │   ├── auth.css              # Style Đăng nhập / Đăng ký
-│   │   └── practice.css          # Style phòng luyện nói / Chat AI
-│   ├── js/                       # JavaScript xử lý Logic
-│   │   ├── config.js             # Biến môi trường (Supabase URL, Backend URL)
-│   │   ├── supabase-client.js    # Khởi tạo Supabase Client
-│   │   ├── api.js                # Hàm fetch() gọi Backend REST API
-│   │   ├── auth.js               # Đăng nhập, đăng ký, quản lý JWT
-│   │   ├── audio.js              # Thu âm micro từ trình duyệt (MediaRecorder API)
-│   │   └── main.js               # Điều khiển DOM chính
-│   ├── index.html                # Trang chủ
+│   ├── src/                      # Source Code TypeScript & Styles
+│   │   ├── css/                  # Stylesheets (style.css, auth.css, practice.css)
+│   │   └── ts/                   # TypeScript Logic
+│   │       ├── config.ts         # Biến môi trường (Supabase URL, API Key, Backend URL)
+│   │       ├── supabase-client.ts# Khởi tạo Supabase Client (Auth, Storage)
+│   │       ├── api.ts            # Hàm fetch() gọi sang FastAPI Backend
+│   │       ├── auth.ts           # Đăng nhập, đăng ký, lấy JWT Access Token
+│   │       ├── audio.ts          # Thu âm micro từ trình duyệt (MediaRecorder API)
+│   │       └── main.ts           # Logic điều khiển DOM chính của ứng dụng
+│   ├── index.html                # Trang chủ / Trang giới thiệu
 │   ├── login.html                # Trang Đăng nhập / Đăng ký
-│   ├── practice.html             # Trang luyện tập (Ghi âm / Chat AI)
+│   ├── practice.html             # Trang luyện tập (Ghi âm / Chat AI - Hỗ trợ Anh/Nhật)
 │   ├── dashboard.html            # Trang cá nhân / Tiến độ học tập
+│   ├── tsconfig.json             # Cấu hình TypeScript Compiler
+│   ├── package.json              # Quản lý dependencies & build scripts
 │   ├── firebase.json             # Cấu hình Firebase Hosting
 │   └── .firebaserc               # Cấu hình dự án Firebase
 │
@@ -61,21 +61,21 @@ superlanguage-5.0/
 │   │   │   └── v1/
 │   │   │       ├── endpoints/
 │   │   │       │   ├── auth.py   # Verify Token từ Supabase
-│   │   │       │   ├── audio.py  # Nhận file audio & xử lý STT
-│   │   │       │   └── chat.py   # Xử lý hội thoại AI Tutor
+│   │   │       │   ├── audio.py  # Xử lý STT (Speech-to-Text cho Anh/Nhật)
+│   │   │       │   └── chat.py   # Xử lý hội thoại AI Tutor (Tích hợp Gemini & Deepseek)
 │   │   │       └── router.py     # Định tuyến API
 │   │   ├── core/                 # Cấu hình hệ thống (config.py, security.py)
 │   │   ├── services/             # Logic nghiệp vụ AI & Data
-│   │   │   ├── ai_service.py     # Gọi Gemini & Deepseek API
+│   │   │   ├── ai_service.py     # Tích hợp SDK Gemini & Deepseek API
 │   │   │   └── stt_service.py    # Xử lý nhận diện giọng nói
-│   │   └── main.py               # Entry point chính của FastAPI
-│   ├── .env                      # Biến môi trường (SECRET, Keys) - DO NOT COMMIT
+│   │   └── main.py               # Entry point chính của FastAPI (CORS, Middlewares)
+│   ├── .env                      # Lưu SECRET KEY, Supabase Key, Gemini/Deepseek Key
 │   ├── Dockerfile                # File đóng gói backend
-│   └── requirements.txt          # Thư viện Python
+│   └── requirements.txt          # Thư viện Python (fastapi, uvicorn, supabase, google-genai...)
 │
-└── supabase/                     # Quản lý Database
-    └── migrations/
-        └── 20260101_init_db.sql  # SQL khởi tạo bảng (users, practice_logs, ...)
+└── supabase/                     # Quản lý Cơ sở dữ liệu Supabase (PostgreSQL)
+    └── migrations/               # Cấu hình DB PostgreSQL & Vector
+        └── 20260101_init_db.sql  # SQL khởi tạo bảng (users, practice_logs, courses, ...)
 ```
 
 ---
