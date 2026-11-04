@@ -1,10 +1,4 @@
-# === OS & System Files ===
-.DS_Store
-Thumbs.db
-ehthumbs.db
-Desktop.ini
-
-# === Environment & Secrets (.env quan trọng nhất để không lộ Key) ===
+# === Environment & Secrets (TUYỆT ĐỐI KHÔNG PUSH LÊN GIT) ===
 .env
 .env.local
 .env.*.local
@@ -12,44 +6,31 @@ Desktop.ini
 *.key
 service-account.json
 
-# === Python / FastAPI Backend ===
+# === Python / FastAPI Backend & Virtual Environment ===
+.venv/
+venv/
+ENV/
+env/
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
 .Python
 build/
-develop-eggs/
 dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-share/python-wheels/
 *.egg-info/
-.installed.cfg
-*.egg
-MANIFEST
-.venv/
-env/
-ENV/
-env.bak/
-venv.bak/
 .pytest_cache/
 .mypy_cache/
-.ruff_cache/
 .coverage
-htmlcov/
 
-# === Node.js / JavaScript Frontend (nếu dùng npm quản lý thư viện) ===
+# === OS & System Files ===
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# === Frontend / Node.js (nếu có dùng gói npm) ===
 node_modules/
-dist/
-build/
 .npm
 .eslintcache
 
@@ -58,12 +39,10 @@ build/
 !.vscode/settings.json
 !.vscode/extensions.json
 .idea/
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.swp
 
-# === Firebase Hosting Deployment ===
+# === Firebase Hosting Logs ===
 .firebase/
 firebase-debug.log
+
+####
+.vscode
